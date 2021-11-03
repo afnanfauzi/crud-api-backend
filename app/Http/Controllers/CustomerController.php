@@ -76,7 +76,7 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $cust)
+    public function update(Request $request, Customer $customer)
     {
         $input = $request->all();
 
@@ -90,12 +90,12 @@ class CustomerController extends Controller
             return $this->errorResponse('Validation Error', $validator->errors());
         }
 
-        $cust->nama = $input['nama'];
-        $cust->email = $input['email'];
-        $cust->save();
+        $customer->nama = $input['nama'];
+        $customer->email = $input['email'];
+        $customer->save();
 
         // Ambil fungsi dari app/Http/Controllers/Controller
-        return $this->successResponse(new CustomerResource($cust), 'Berhasil Simpan Data');
+        return $this->successResponse(new CustomerResource($customer), 'Berhasil Simpan Data');
     }
 
     /**
@@ -104,9 +104,9 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $cust)
+    public function destroy(Customer $customer)
     {
-        $cust->delete();
+        $customer->delete();
 
         // Ambil fungsi dari app/Http/Controllers/Controller
         return $this->successResponse([], 'Berhasil Hapus Data');
